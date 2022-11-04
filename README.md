@@ -14,3 +14,5 @@ note: all empty href links and links that direct to /# are discarded
 ---
 
 # 3. npm run start
+
+# 4. All results are in folder /results

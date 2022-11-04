@@ -41,7 +41,7 @@ async function getLinksFromURL(url) {
       }
     });
     jsonMaker(links);
-    return ">>> results.json was created.";
+    return ">>> results.json was created in folder /results.";
   } catch (e) {
     console.log(e);
   }
