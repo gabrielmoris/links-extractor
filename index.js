@@ -21,12 +21,24 @@ async function getLinksFromURL(url) {
 
     let $ = cheerio.load(httpResponse.data);
     let linkObjects = $("a"); // get all hyperlinks
-
+    let hrefLink;
     linkObjects.each((index, element) => {
-      links.push({
-        text: $(element).text().trim().replace(" ", ""), // get the text
-        href: $(element).attr("href"), // get the href attribute
-      });
+      if (
+        $(element).text().trim().replace(" ", "") !== "" &&
+        $(element).attr("href") &&
+        $(element).attr("href") !== "#"
+      ) {
+        // get the href attribute
+        if ($(element).attr("href").substring(0, 4) != "http") {
+          hrefLink = process.env.HOMEPAGE + $(element).attr("href");
+        } else {
+          hrefLink = $(element).attr("href");
+        }
+        links.push({
+          text: $(element).text().trim().replace(" ", ""), // get the text
+          href: hrefLink,
+        });
+      }
     });
     jsonMaker(links);
     return ">>> results.json was created.";
